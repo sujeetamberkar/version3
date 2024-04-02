@@ -34,14 +34,20 @@ def teacher_login(request):
         form = AuthenticationForm()
     return render(request, 'teacher/login.html', {'form': form})
 
+@login_required
 def teacher_notice(request):
     if request.method == 'POST':
         notice_content = request.POST.get('notice')
         if notice_content:
             Notice.objects.create(content=notice_content)
-            return HttpResponse('Notice saved successfully!')
+            # Redirect to the teacher's home page after the notice is successfully saved
+            return redirect('teacher_home')
         else:
-            return HttpResponse('Please enter some text for the notice.')
+            # Optionally, handle the case where the notice content is empty
+            # You might want to pass a message indicating the need for notice content
+            return render(request, 'teacher/teachernotice.html', {
+                'error': 'Please enter some text for the notice.'
+            })
     return render(request, 'teacher/teachernotice.html')
 
 def add_course_material(request):

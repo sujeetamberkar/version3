@@ -17,3 +17,15 @@ raj@1234
 
 abhi
 abhi@1234
+
+
+python manage.py shell
+
+# Import the models
+from teacher.models import Notice, CourseMaterial
+
+# Delete all Notice entries
+Notice.objects.all().delete()
+
+# Delete all CourseMaterial entries
+CourseMaterial.objects.all().delete()
