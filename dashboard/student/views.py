@@ -21,12 +21,14 @@ def student_login(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            if user is not None:
+            # Check if authenticated user belongs to the 'students' group
+            if user is not None and user.groups.filter(name='students').exists():
                 login(request, user)
                 return redirect('home')  # Redirect to the student's home page
             else:
-                # Handle invalid login
-                pass
+                # If user is not authenticated or not part of the 'students' group
+                # Consider adding a message to indicate login failure or unauthorized access
+                return render(request, 'student/login.html', {'form': form, 'error': 'Invalid credentials or you do not have permission to access this page.'})
     else:
         form = AuthenticationForm()
     return render(request, 'student/login.html', {'form': form})

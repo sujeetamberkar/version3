@@ -23,13 +23,13 @@ def teacher_login(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            if user is not None:
+            if user is not None and user.groups.filter(name='teachers').exists():
                 login(request, user)
-                # Redirect to the teacher's specific home page. Adjust 'teacher_home' as necessary.
                 return redirect('teacher_home')
             else:
-                # Consider adding a message to indicate login failure
-                pass
+                # If the user is not authenticated or not in the 'teachers' group, handle as a failed login attempt
+                # Here, you might want to add a message indicating the failure reason
+                return render(request, 'teacher/login.html', {'form': form, 'error': 'Invalid credentials or you do not have permission to access this page.'})
     else:
         form = AuthenticationForm()
     return render(request, 'teacher/login.html', {'form': form})
