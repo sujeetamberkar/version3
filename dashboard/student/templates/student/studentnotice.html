@@ -1,0 +1,25 @@
+<!-- student/templates/student/studentnotice.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notices</title>
+</head>
+<body>
+    <h2>Notices</h2>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Notice</th>
+        </tr>
+        {% for notice in notices %}
+        <tr>
+            <td>{{ notice.created_at }}</td>
+            <td>{{ notice.content }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

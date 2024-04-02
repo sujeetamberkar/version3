@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Marks</title>
+</head>
+<body>
+    <h1>Your Marks</h1>
+    {% if marks_instance %}
+    <p>Marks Obtained: {{ marks_instance.marks_obtained }}</p>
+    <p>Total Marks: {{ marks_instance.total_marks }}</p>
+    <p>Percentage: {{ percentage|floatformat:2 }}%</p>
+    {% else %}
+    <p>No marks recorded.</p>
+    {% endif %}
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>
