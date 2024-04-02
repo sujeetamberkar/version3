@@ -12,8 +12,7 @@
         <a href="{% url 'teacher_notice' %}"><button>Add Notice</button></a>
         <a href="{% url 'teacher_course_material' %}"><button>Add Course Material</button></a>
         <a href="{% url 'enter_update_marks' %}"><button>Enter Marks</button></a>
-
-        <h1>Hi</h1>
+        <a href="{% url 'main' %}">Go back to main</a>
     {% else %}
         <h1>Welcome, Guest!</h1>
     {% endif %}
