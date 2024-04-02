@@ -1,21 +1,52 @@
-<!-- student/templates/student/home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .btn-custom {
+            background-color: #495057; /* Bootstrap's gray-600 */
+            color: white;
+            margin-right: 10px; /* Add space to the right of buttons */
+        }
+        /* Optional: adjust the spacing as per your design needs */
+        .btn-custom:not(:last-child) {
+            margin-bottom: 10px; /* Space between buttons when wrapped */
+        }
+        .btn-custom:hover {
+            background-color: #343a40; /* Bootstrap's gray-800 for a slight hover effect */
+        }
+        .container {
+            max-width: 960px; /* A standard width for medium-large screens */
+        }
+        /* Optional: for a full-width grey background */
+        body {
+            background-color: #f8f9fa; /* Bootstrap's gray-100 for a light background */
+        }
+        .welcome {
+            margin-bottom: 20px; /* Space below the welcome message */
+        }
+    </style>
 </head>
 <body>
-    {% if user.is_authenticated %}
-        <h1>Welcome, {{ user.username }}!</h1>
-        <!-- Button to view notices -->
-        <a href="{% url 'student_notice' %}"><button>Show Notice</button></a>
-        <a href="{% url 'student_course_material' %}"><button>Show Course Materials</button></a>
-        <a href="{% url 'student_view_marks' %}"><button>Show Marks</button></a>
-        <a href="{% url 'main' %}">Go back to main</a>
-    {% else %}
-        <h1>Welcome, Guest!</h1>
-    {% endif %}
+    <div class="container mt-5 p-3 bg-white shadow-sm rounded">
+        {% if user.is_authenticated %}
+            <h1 class="welcome">Welcome, {{ user.username }}!</h1>
+            <div class="d-grid gap-3">
+                <a href="{% url 'student_notice' %}" class="btn btn-custom">Show Notice</a>
+                <a href="{% url 'student_course_material' %}" class="btn btn-custom">Show Course Materials</a>
+                <a href="{% url 'student_view_marks' %}" class="btn btn-custom">Show Marks</a>
+                <a href="{% url 'main' %}" class="btn btn-outline-secondary btn-custom">Go back to main</a>
+            </div>
+        {% else %}
+            <h1>Welcome, Guest!</h1>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

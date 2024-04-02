@@ -1,19 +1,71 @@
-<!-- teacher/templates/teacher/login.html -->
+{% load static %}
+{% load form_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .btn-custom {
+            background-color: #495057; /* Bootstrap's gray-600 */
+            color: white;
+            margin-top: 10px; /* Space above the button */
+        }
+        .btn-custom:hover {
+            background-color: #343a40; /* Bootstrap's gray-800 for a slight hover effect */
+        }
+        .container {
+            max-width: 960px; /* A standard width for medium-large screens */
+            margin-top: 100px; /* More space at the top */
+        }
+        .form-control {
+            margin-bottom: 10px; /* Space below form fields */
+        }
+        .form-group {
+            margin-bottom: 20px; /* More space between form groups */
+        }
+        .login-container {
+            padding: 20px;
+            background-color: #f8f9fa; /* Bootstrap's gray-100 */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px; /* Space above the back link */
+        }
+    </style>
 </head>
 <body>
-    <h2>Student Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-    <a href="{% url 'main' %}">Go back to main</a>
+    <div class="container login-container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h2 class="mb-4 text-center">Student Login</h2>
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.username.label_tag }}
+                        {{ form.username|add_class:"form-control" }}
+                        {{ form.username.errors }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label_tag }}
+                        {{ form.password|add_class:"form-control" }}
+                        {{ form.password.errors }}
+                    </div>
+                    <button type="submit" class="btn btn-custom btn-block">Login</button>
+                </form>
+                <a href="{% url 'main' %}" class="back-link">Go back to main</a>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

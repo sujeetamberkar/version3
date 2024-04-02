@@ -8,19 +8,46 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Bootstrap's gray-100 for a light background */
+        }
+        .main-container {
+            padding: 20px;
+            background-color: #fff; /* White background */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            margin-top: 100px; /* More space at the top */
+        }
+        .btn-custom {
+            background-color: #495057; /* Bootstrap's gray-600 */
+            color: white;
+            width: 200px; /* Fixed width for buttons */
+            margin-top: 10px; /* Space above the button */
+        }
+        .btn-custom:hover {
+            background-color: #343a40; /* Bootstrap's gray-800 for a slight hover effect */
+        }
+        .welcome-heading {
+            margin-bottom: 30px; /* Space below the heading */
+        }
+        /* Ensuring the buttons stack on smaller screens and space out on larger ones */
+        @media (min-width: 768px) {
+            .btn-custom {
+                margin-top: 0;
+                margin-right: 10px; /* Space to the right of the button */
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container mt-5">
-    <h1 class="text-center">Welcome to the Dashboard</h1>
-    <div class="row mt-4">
-        <div class="col text-center">
-            <a href="/student/login/" class="btn btn-primary mr-2">Login as Student</a>
-            <br>
-            <br>
-            <a href="/teacher/login/" class="btn btn-secondary">Login as Teacher</a>
-        </div>
+<div class="container main-container">
+    <h1 class="text-center welcome-heading">Welcome to the Dashboard</h1>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a href="/student/login/" class="btn btn-custom">Login as Student</a>
+        
+        <a href="/teacher/login/" class="btn btn-custom">Login as Teacher</a>
     </div>
 </div>
 

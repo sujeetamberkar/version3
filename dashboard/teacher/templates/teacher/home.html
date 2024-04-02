@@ -1,20 +1,64 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Bootstrap's gray-100 for a light background */
+        }
+        .home-container {
+            padding: 20px;
+            background-color: #fff; /* White background */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            max-width: 600px;
+            margin: 100px auto; /* Center in the middle of the page */
+        }
+        .btn-custom {
+            background-color: #495057; /* Bootstrap's gray-600 */
+            color: white;
+            width: 100%; /* Full width for the button */
+            margin-top: 10px; /* Space above the button */
+        }
+        .btn-custom:hover {
+            background-color: #343a40; /* Bootstrap's gray-800 for a slight hover effect */
+        }
+        .welcome-heading {
+            margin-bottom: 30px; /* Space below the heading */
+            text-align: center;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px; /* Space above the back link */
+        }
+    </style>
 </head>
 <body>
-    {% if user.is_authenticated %}
-        <h1>Welcome, {{ user.username }}!</h1>
-        <!-- Button to redirect to the notice creation page -->
-        <a href="{% url 'teacher_notice' %}"><button>Add Notice</button></a>
-        <a href="{% url 'teacher_course_material' %}"><button>Add Course Material</button></a>
-        <a href="{% url 'enter_update_marks' %}"><button>Enter Marks</button></a>
-        <a href="{% url 'main' %}">Go back to main</a>
-    {% else %}
-        <h1>Welcome, Guest!</h1>
-    {% endif %}
+    <div class="home-container">
+        {% if user.is_authenticated %}
+            <h1 class="welcome-heading">Welcome, {{ user.username }}!</h1>
+            <div class="d-grid gap-2">
+                <a href="{% url 'teacher_notice' %}" class="btn btn-custom">Add Notice</a>
+                <a href="{% url 'teacher_course_material' %}" class="btn btn-custom">Add Course Material</a>
+                <a href="{% url 'enter_update_marks' %}" class="btn btn-custom">Enter Marks</a>
+                <a href="{% url 'main' %}" class="back-link">Go back to main</a>
+            </div>
+        {% else %}
+            <h1 class="welcome-heading">Welcome, Guest!</h1>
+        {% endif %}
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
