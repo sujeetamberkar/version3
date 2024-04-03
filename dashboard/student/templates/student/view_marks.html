@@ -1,17 +1,55 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Marks</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background for contrast */
+        }
+        .marks-container {
+            padding: 20px;
+            background-color: #fff; /* White background */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            margin: 50px auto; /* Center in the middle of the page */
+            max-width: 400px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px; /* Space above the back link */
+            color: #495057;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Your Marks</h1>
-    {% if marks_instance %}
-    <p>Marks Obtained: {{ marks_instance.marks_obtained }}</p>
-    <p>Total Marks: {{ marks_instance.total_marks }}</p>
-    <p>Percentage: {{ percentage|floatformat:2 }}%</p>
-    {% else %}
-    <p>No marks recorded.</p>
-    {% endif %}
-    <a href="{% url 'home' %}">Back to Home</a>
+    <div class="container">
+        <div class="marks-container text-center">
+            <h1>Your Marks</h1>
+            {% if marks_instance %}
+                <p><strong>Marks Obtained:</strong> {{ marks_instance.marks_obtained }}</p>
+                <p><strong>Total Marks:</strong> {{ marks_instance.total_marks }}</p>
+                <p><strong>Percentage:</strong> {{ percentage|floatformat:2 }}%</p>
+            {% else %}
+                <p>No marks recorded.</p>
+            {% endif %}
+            <a href="{% url 'home' %}" class="back-link">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; Bootstrap with Popper -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

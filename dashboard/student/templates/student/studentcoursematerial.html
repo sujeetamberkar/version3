@@ -1,4 +1,4 @@
-<!-- student/templates/student/studentcoursematerial.html -->
+{% load static %}
 {% load youtube_filters %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,16 +6,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Materials</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background for contrast */
+        }
+        .course-materials-container {
+            padding: 20px;
+            background-color: #fff; /* White background */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            margin: 50px auto; /* Center in the middle of the page */
+            max-width: 700px;
+        }
+        .video-container {
+            margin-bottom: 30px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px; /* Space above the back link */
+            color: #495057;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .download-button {
+            margin-top: 10px; /* Space above the download button */
+            text-decoration: none;
+        }
+        .btn-download {
+            background-color: #495057; /* Bootstrap's gray-600 */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-download:hover, .btn-download:focus {
+            background-color: #343a40; /* Darker shade for hover effect */
+            color: white;
+            text-decoration: none;
+        }
+        .chapter-title {
+            margin-bottom: 10px; /* Space below the chapter title */
+        }
+        iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+            margin-bottom: 10px; /* Space below the iframe */
+        }
+    </style>
 </head>
 <body>
-    <h2>Course Materials</h2>
-    {% for material in materials %}
-        <h3>{{ material.chapter_name }}</h3>
-        <!-- Embed YouTube Video -->
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ material.video_url|youtube_id }}" frameborder="0" allowfullscreen></iframe>
-        <!-- Download PDF Button -->
-        <a href="{{ material.pdf_file.url }}" download="{{ material.chapter_name }}.pdf"><button>Download PDF</button></a>
-    {% endfor %}
-    <a href="{% url 'home' %}">Back to Home</a>
+    <div class="course-materials-container">
+        <h2 class="text-center mb-4">Course Materials</h2>
+        {% for material in materials %}
+            <div class="video-container">
+                <h3 class="chapter-title">{{ material.chapter_name }}</h3>
+                <!-- Embed YouTube Video -->
+                <iframe src="https://www.youtube.com/embed/{{ material.video_url|youtube_id }}" frameborder="0" allowfullscreen></iframe>
+                <!-- Download PDF Button -->
+                <a href="{{ material.pdf_file.url }}" class="btn-download" download="{{ material.chapter_name }}.pdf">Download PDF</a>
+            </div>
+        {% endfor %}
+        <a href="{% url 'home' %}" class="back-link">Back to Home</a>
+    </div>
+
+    <!-- Optional JavaScript; Bootstrap with Popper -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -63,26 +63,20 @@ def add_course_material(request):
 
 
 @login_required
+@login_required
 def enter_update_marks(request):
-    # Get all users in the 'students' group
+    MarksFormSet = modelformset_factory(StudentMarks, form=MarksForm, extra=0)
     student_group = Group.objects.get(name='students')
     students = student_group.user_set.all()
 
     if request.method == 'POST':
-        for student in students:
-            marks_obtained = request.POST.get(f'marks_obtained_{student.id}')
-            total_marks = request.POST.get(f'total_marks_{student.id}')
-            # Update or create the StudentMarks record
-            StudentMarks.objects.update_or_create(
-                student=student,
-                defaults={
-                    'marks_obtained': marks_obtained,
-                    'total_marks': total_marks
-                }
-            )
-        return redirect('enter_update_marks')
+        formset = MarksFormSet(request.POST)
+        if formset.is_valid():
+            formset.save()
+            return redirect('teacher_home')
+    else:
+        # Initialize the formset with existing StudentMarks instances for the students
+        queryset = StudentMarks.objects.filter(student__in=students).order_by('student')
+        formset = MarksFormSet(queryset=queryset)
 
-    # Fetch existing marks for all students
-    marks = {mark.student_id: mark for mark in StudentMarks.objects.filter(student__in=students)}
-
-    return render(request, 'teacher/teachermarks.html', {'students': students, 'marks': marks})
+    return render(request, 'teacher/teachermarks.html', {'formset': formset})

@@ -1,18 +1,63 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Notice</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Bootstrap's gray-100 for a light background */
+        }
+        .notice-container {
+            padding: 20px;
+            background-color: #fff; /* White background */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            max-width: 700px;
+            margin: 50px auto; /* Center in the middle of the page */
+        }
+        .btn-custom {
+            background-color: #495057; /* Bootstrap's gray-600 */
+            color: white;
+            margin-top: 20px; /* Space above the button */
+        }
+        .btn-custom:hover {
+            background-color: #343a40; /* Bootstrap's gray-800 for a slight hover effect */
+        }
+        .form-control {
+            margin-bottom: 20px; /* Space below the textarea */
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px; /* Space above the back link */
+        }
+        textarea {
+            width: 100%; /* Full width */
+            resize: vertical; /* Allow only vertical resizing */
+        }
+    </style>
 </head>
 <body>
-    <form method="post">
-        {% csrf_token %}
-        <textarea name="notice" rows="10" cols="50" placeholder="Enter your notice here..."></textarea>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-    <a href="{% url 'teacher_home' %}">Go to Home</a>
+    <div class="notice-container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea name="notice" class="form-control" rows="10" placeholder="Enter your notice here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-custom btn-block">Submit</button>
+        </form>
+        <a href="{% url 'teacher_home' %}" class="back-link">Go to Home</a>
+    </div>
 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
